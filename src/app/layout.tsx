@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google"
 import "@/styles/globals.css"
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme/theme-provider"
+import { ThemeProvider } from "@/providers/theme-provider"
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { RecipeStoreProvider } from "@/providers/recipe-store-provider";
 import Header from "@/components/layout/header";
 
 const fontSans = FontSans({
@@ -71,8 +72,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            {children}
+            <RecipeStoreProvider>
+              <Header />
+              {children}
+              {/* footer */}
+            </RecipeStoreProvider>
           </ThemeProvider>
         </UserProvider>
       </body>

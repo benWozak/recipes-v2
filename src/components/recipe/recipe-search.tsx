@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -18,6 +19,8 @@ import { Input } from "@/components/ui/input"
 
 import { parseRecipeData } from '@/app/actions';
 
+import { useRecipeStore } from '@/providers/recipe-store-provider'
+
 const FormSchema = z.object({
   recipe: z.string().min(2, {
     message: "Recipe must be a URL from a website.",
@@ -26,6 +29,11 @@ const FormSchema = z.object({
 
 
 export function RecipeSearch() {
+  const router = useRouter()
+  const { createRecipe } = useRecipeStore(
+    (state) => state,
+  )
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -33,17 +41,16 @@ export function RecipeSearch() {
     },
   })
 
-  async function handleParseURLData(value: string) {
-    const response = await parseRecipeData(value)
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const response = await parseRecipeData(data.recipe)
 
-    console.log(response)
+    if(!!response) {
+      void createRecipe(response)
 
-  }
-  
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-    handleParseURLData(data.recipe)
+      router.push('/recipe')
+    } else {
+      // handle error
+    }
   }
 
   return (
