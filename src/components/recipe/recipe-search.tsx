@@ -22,7 +22,7 @@ import { parseRecipeData } from '@/app/actions';
 import { useRecipeStore } from '@/providers/recipe-store-provider'
 
 const FormSchema = z.object({
-  recipe: z.string().min(2, {
+  value: z.string().min(2, {
     message: "Recipe must be a URL from a website.",
   }),
 })
@@ -37,12 +37,12 @@ export function RecipeSearch() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      recipe: "",
+      value: "",
     },
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const response = await parseRecipeData(data.recipe)
+    const response = await parseRecipeData(data.value)
 
     if(!!response) {
       void createRecipe(response)
@@ -58,7 +58,7 @@ export function RecipeSearch() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="recipe"
+          name="value"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Recipe</FormLabel>
