@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/providers/theme-provider"
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { RecipeStoreProvider } from "@/providers/recipe-store-provider";
 import Header from "@/components/layout/header";
+import ErrorBoundary from "@/lib/ErrorBounadry";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -74,7 +75,9 @@ export default function RootLayout({
           >
             <RecipeStoreProvider>
               <Header />
-              {children}
+              <ErrorBoundary fallback={<div>Error</div>}>
+                {children}
+              </ErrorBoundary>
               {/* footer */}
             </RecipeStoreProvider>
           </ThemeProvider>
