@@ -75,7 +75,7 @@ export default function Page() {
                 <CardHeader>
                   <CardTitle>Ingredients</CardTitle>
                   <CardDescription>
-                    View & make changes to your ingredients here. Click save when you're done.
+                    View & make changes to your ingredients here. Click save when you&apos;re done.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">

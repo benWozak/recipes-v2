@@ -13,10 +13,10 @@ const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_NAME = "OurRecipes";
+const APP_DEFAULT_TITLE = "OurRecipes";
+const APP_TITLE_TEMPLATE = "%s - OurRecipes";
+const APP_DESCRIPTION = "Costomizable online recipes without the bloat";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,

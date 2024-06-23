@@ -14,14 +14,14 @@ const AddToMobileChromeiOS = dynamic(() => import("./AddToMobileChromeiOS"), { l
 const AddToSamsung = dynamic(() => import("./AddToSamsung"), { loading: () => <ModuleLoading /> });
 const OtherBrowserFallback = dynamic(() => import("./OtherBrowserFallback"), { loading: () => <ModuleLoading /> });
 
-import useUserAgent from "@/utils/hooks/useUserAgent";
+// import useUserAgent from "@/utils/hooks/useUserAgent";
 
 type AddToHomeScreenPromptType = "safari" | "chrome" | "firefox" | "other" | "firefoxIos" | "chromeIos" | "samsung" | "";
 const COOKIE_NAME = "addToHomeScreenPrompt";
 
 export default function AddToHomeScreen() {
   const [displayPrompt, setDisplayPrompt] = useState<AddToHomeScreenPromptType>("");
-  const { userAgent, isMobile, isStandalone, isIOS } = useUserAgent();
+  // const { userAgent, isMobile, isStandalone, isIOS } = useUserAgent();
 
   const closePrompt = () => {
     setDisplayPrompt("");
@@ -34,30 +34,30 @@ export default function AddToHomeScreen() {
     setDisplayPrompt("");
   };
 
-  useEffect(() => {
-    const addToHomeScreenPromptCookie = getCookie(COOKIE_NAME);
-    if (addToHomeScreenPromptCookie !== "dontShow") {
-      // Only show prompt if user is on mobile and app is not installed
-      if (isMobile && !isStandalone) {
-        if (userAgent === "Safari") {
-          setDisplayPrompt("safari");
-        } else if (userAgent === "Chrome") {
-          setDisplayPrompt("chrome");
-        } else if (userAgent === "Firefox") {
-          setDisplayPrompt("firefox");
-        } else if (userAgent === "FirefoxiOS") {
-          setDisplayPrompt("firefoxIos");
-        } else if (userAgent === "chromeIos") {
-          setDisplayPrompt("chromeIos");
-        } else if (userAgent === "SamsungBrowser") {
-          setDisplayPrompt("samsung");
-        } else {
-          setDisplayPrompt("other");
-        }
-      }
-    } else {
-    }
-  }, [userAgent, isMobile, isStandalone, isIOS]);
+  // useEffect(() => {
+  //   const addToHomeScreenPromptCookie = getCookie(COOKIE_NAME);
+  //   if (addToHomeScreenPromptCookie !== "dontShow") {
+  //     // Only show prompt if user is on mobile and app is not installed
+  //     if (isMobile && !isStandalone) {
+  //       if (userAgent === "Safari") {
+  //         setDisplayPrompt("safari");
+  //       } else if (userAgent === "Chrome") {
+  //         setDisplayPrompt("chrome");
+  //       } else if (userAgent === "Firefox") {
+  //         setDisplayPrompt("firefox");
+  //       } else if (userAgent === "FirefoxiOS") {
+  //         setDisplayPrompt("firefoxIos");
+  //       } else if (userAgent === "chromeIos") {
+  //         setDisplayPrompt("chromeIos");
+  //       } else if (userAgent === "SamsungBrowser") {
+  //         setDisplayPrompt("samsung");
+  //       } else {
+  //         setDisplayPrompt("other");
+  //       }
+  //     }
+  //   } else {
+  //   }
+  // }, [userAgent, isMobile, isStandalone, isIOS]);
 
   const Prompt = () => (
     <>
