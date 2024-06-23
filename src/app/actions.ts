@@ -37,7 +37,7 @@ export async function parseRecipeData(url: string) {
  * @returns Database version info
  */
 export async function testDatabaseConnection() {
-  const DATABASE_URL = `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}`
+  const DATABASE_URL = `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}/${process.env.POSTGRES_DATABASE}`
   const sql = postgres(DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
   console.log(response);

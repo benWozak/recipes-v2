@@ -21,6 +21,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@types/auth0": "^3.3.10",
     "@types/react-icons": "^3.0.0",
+    "@vercel/postgres": "^0.8.0",
     "axios": "^1.6.8",
     "cheerio": "^1.0.0-rc.12",
     "class-variance-authority": "^0.7.0",

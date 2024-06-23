@@ -17,8 +17,11 @@ import {
 } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import  NutritionInfo from "@/components/recipe/nutrition-info"
 
 import { durationFormatter } from "@/lib/utils";
+
+import { testDatabaseConnection } from '../actions'
 
 type RecipeInstruction = {
   "@type": "HowToStep",
@@ -31,6 +34,8 @@ export default function Page() {
   const { recipe } = useRecipeStore(
     (state) => state,
   )
+
+  console.log(recipe)
   return (
     <main className="app-main">
       <div className="container mx-auto px-8 py-4">
@@ -40,17 +45,29 @@ export default function Page() {
               <CardTitle>{recipe?.name}</CardTitle>
             </CardHeader>
               <div className="flex justify-between flex-row max-lg:flex-col"> 
+                {!!recipe?.image[0] && 
+                  <CardContent className="space-y-2">
+                    <img src={recipe?.image[0]} width="300" height="300" alt="Recipe Image" className="rounded" /> 
+                  </CardContent>
+                }
+
+                {!! recipe?.nutrition && 
+                  <CardContent className="space-y-2">
+                    <NutritionInfo data={recipe.nutrition} />
+                  </CardContent>
+                }
+                
                 <CardContent>
                   <Separator className="my-4" />
-                  {!!recipe?.prepTime 
-                  ? <div className="flex h-5 items-center space-x-4 text-sm">
+                  {!!recipe?.prepTime &&
+                   <div className="flex h-5 items-center space-x-4 text-sm">
                       <div>Prep: {durationFormatter(recipe?.prepTime)}</div>
                       <Separator orientation="vertical" />
                       <div>Cook: {durationFormatter(recipe?.cookTime)}</div>
                       <Separator orientation="vertical" />
                       <div>Total: {durationFormatter(recipe?.totalTime)}</div>
                     </div>
-                  : null}
+                  }
                   <Separator className="my-4" />
                   <div className="flex flex-wrap items-center space-x-2 space-y-2 text-sm">
                     {!!recipe?.recipeCategory && recipe?.recipeCategory.map((item: string, index: number) => {
@@ -58,15 +75,9 @@ export default function Page() {
                     })}
                   </div>
                 </CardContent>
-              
-                <CardContent className="space-y-2">
-                  {!!recipe?.image[0] 
-                    && <img src={recipe?.image[0]} width="300" height="300" alt="Recipe Image" className="rounded" /> 
-                  } 
-                </CardContent>
               </div>
               <CardFooter>
-                <Button>Save This Recipe</Button>
+                <Button onClick={() => testDatabaseConnection()}>Save This Recipe</Button>
               </CardFooter>
           </Card>
           <Tabs defaultValue="ingredients">

@@ -72,7 +72,7 @@ export function RecipeSearch() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Get Recipe</Button>
       </form>
     </Form>
   )
